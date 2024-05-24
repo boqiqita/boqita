@@ -207,10 +207,10 @@ func convert(s string, numRows int) string {
 	return ret.String()
 }
 
-func Test_l7(t *testing.T) {
-
-}
-
-func reverse(x int) int {
-
-}
+//func Test_l7(t *testing.T) {
+//
+//}
+//
+//func reverse(x int) int {
+//
+//}
