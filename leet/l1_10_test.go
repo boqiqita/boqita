@@ -2,6 +2,7 @@ package leet
 
 import (
 	"bytes"
+	"fmt"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -214,3 +215,22 @@ func convert(s string, numRows int) string {
 //func reverse(x int) int {
 //
 //}
+
+func Test_l9(t *testing.T) {
+	assert.True(t, isPalindrome(121))
+	assert.False(t, isPalindrome(-121))
+	assert.False(t, isPalindrome(10))
+}
+
+func isPalindrome(x int) bool {
+	if x < 10 && x >= 0 {
+		return true
+	}
+	str := fmt.Sprintf("%d", x)
+	for l, r := 0, len(str)-1; l < r; l, r = l+1, r-1 {
+		if str[l] != str[r] {
+			return false
+		}
+	}
+	return true
+}
