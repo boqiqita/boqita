@@ -11,7 +11,7 @@ func Test_l2903(t *testing.T) {
 	assert.Equal(t, 3, ret[1])
 }
 
-var ret = []int{-1, -1}
+var default2903 = []int{-1, -1}
 
 func findIndices(nums []int, indexDifference int, valueDifference int) []int {
 	length, temp := len(nums), 0
@@ -23,5 +23,5 @@ func findIndices(nums []int, indexDifference int, valueDifference int) []int {
 			}
 		}
 	}
-	return ret
+	return default2903
 }

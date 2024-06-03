@@ -208,13 +208,70 @@ func convert(s string, numRows int) string {
 	return ret.String()
 }
 
-//func Test_l7(t *testing.T) {
-//
-//}
-//
-//func reverse(x int) int {
-//
-//}
+func Test_l7(t *testing.T) {
+	assert.Equal(t, 321, reverse(123))
+	assert.Equal(t, -321, reverse(-123))
+	assert.Equal(t, 21, reverse(120))
+	assert.Equal(t, 0, reverse(1534236469))
+}
+
+func reverse(x int) int {
+	if x > -10 && x < 10 {
+		return x
+	}
+
+	m, y := 1, 0
+	if x < 0 {
+		m, x = -1, -x
+	}
+
+	for x != 0 {
+		y, x = y*10+x%10, x/10
+	}
+	x = m * y
+	if x <= -2147483648 || x >= 2147483647 {
+		return 0
+	}
+	return x
+}
+
+func Test_l8(t *testing.T) {
+	assert.Equal(t, 42, myAtoi("42"))
+	assert.Equal(t, -42, myAtoi(" -042"))
+	assert.Equal(t, 1337, myAtoi("1337c0d3"))
+	assert.Equal(t, 0, myAtoi("words and 987"))
+}
+
+func myAtoi(s string) int {
+	i, length, b, num := 0, len(s), true, 0
+	for ; i < length; i++ {
+		if s[i] != ' ' {
+			if s[i] == '-' {
+				b = false
+				i++
+			} else if s[i] == '+' {
+				i++
+			}
+			break
+		}
+	}
+
+	for ; i < length; i++ {
+		if s[i] < '0' || s[i] > '9' {
+			break
+		}
+		num = num*10 + int(s[i]-'0')
+		if b && num > 2147483647 {
+			return 2147483647
+		} else if !b && num > 2147483648 {
+			return -2147483648
+		}
+	}
+	if !b {
+		return -num
+	}
+	return num
+}
 
 func Test_l9(t *testing.T) {
 	assert.True(t, isPalindrome(121))

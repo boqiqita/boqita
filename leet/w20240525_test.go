@@ -38,3 +38,13 @@ func duplicateNumbersXOR(nums []int) int {
 //func numberOfPairs(nums1 []int, nums2 []int, k int) int {
 //
 //}
+
+func Test_100307(t *testing.T) {
+	assert.Equal(t, 7, minimumChairs("EEEEEEE"))
+	assert.Equal(t, 2, minimumChairs("ELELEEL"))
+	assert.Equal(t, 2, minimumChairs("ELEELEELLL"))
+}
+
+func minimumChairs(s string) int {
+
+}
