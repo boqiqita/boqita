@@ -102,31 +102,32 @@ func lengthOfLongestSubstring(s string) int {
 	return max
 }
 
-//func Test_l4(t *testing.T) {
-//	ret := findMedianSortedArrays([]int{1, 2}, []int{3, 4})
-//	assert.Equal(t, 2.5, ret)
-//}
-//
-//func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
-//	len1, len2 := len(nums1), len(nums2)
-//	if len1 > 0 && len2 == 0 {
-//		pair := len1 / 2
-//		if pair*2 == len1 {
-//			return (float64)(nums1[pair]+nums1[pair+1]) / 2
-//		}
-//		return (float64)(nums1[pair+1])
-//	}
-//	if len1 == 0 && len2 > 0 {
-//		pair := len2 / 2
-//		if pair*2 == len2 {
-//			return (float64)(nums2[pair]+nums2[pair+1]) / 2
-//		}
-//		return (float64)(nums2[pair+1])
-//	}
-//
-//	m1, m2 := nums1[len1/2], nums2[len2/2]
-//
-//}
+func Test_l4(t *testing.T) {
+	ret := findMedianSortedArrays([]int{1, 2}, []int{3, 4})
+	assert.Equal(t, 2.5, ret)
+}
+
+func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
+	len1, len2 :=
+	if len1 > 0 && len2 == 0 {
+		pair := len1 / 2
+		if pair*2 == len1 {
+			return (float64)(nums1[pair]+nums1[pair+1]) / 2
+		}
+		return (float64)(nums1[pair+1])
+	}
+	if len1 == 0 && len2 > 0 {
+		pair := len2 / 2
+		if pair*2 == len2 {
+			return (float64)(nums2[pair]+nums2[pair+1]) / 2
+		}
+		return (float64)(nums2[pair+1])
+	}
+
+	l1,l2,r1,r2:=0,0,len(nums1)-1, len(nums2)-1
+
+
+}
 
 func Test_l5(t *testing.T) {
 	ret := longestPalindrome("babad")
