@@ -103,30 +103,35 @@ func lengthOfLongestSubstring(s string) int {
 }
 
 func Test_l4(t *testing.T) {
-	ret := findMedianSortedArrays([]int{1, 2}, []int{3, 4})
-	assert.Equal(t, 2.5, ret)
+	//assert.Equal(t, float64(2), findMedianSortedArrays([]int{1, 3}, []int{2}))
+	//assert.Equal(t, 2.5, findMedianSortedArrays([]int{1, 2}, []int{3, 4}))
+	assert.Equal(t, 2.5, findMedianSortedArrays([]int{2, 4}, []int{1, 3}))
 }
 
 func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
-	len1, len2 :=
-	if len1 > 0 && len2 == 0 {
-		pair := len1 / 2
-		if pair*2 == len1 {
-			return (float64)(nums1[pair]+nums1[pair+1]) / 2
+	length1, length2, m, n := len(nums1), len(nums2), 0, 0
+	for a1, a2, b1, b2 := 0, length1-1, 0, length2-1; a1 <= a2 || b1 <= b2; {
+		if a1 <= a2 && b1 <= b2 {
+			if nums1[a1] <= nums2[b1] {
+				if nums1[a2] >= nums2[b2] {
+					m, n, a1, a2 = nums1[a1], nums1[a2], a1+1, a2-1
+				} else {
+					m, n, a1, b2 = nums1[a1], nums2[b2], a1+1, b2-1
+				}
+			} else {
+				if nums1[a2] <= nums2[b2] {
+					m, n, b1, b2 = nums2[b1], nums2[b2], b1+1, b2-1
+				} else {
+					m, n, b1, a2 = nums2[b1], nums1[a2], b1+1, a2-1
+				}
+			}
+		} else if a1 <= a2 {
+			m, n, a1, a2 = nums1[a1], nums1[a2], a1+1, a2-1
+		} else {
+			m, n, b1, b2 = nums2[b1], nums2[b2], b1+1, b2-1
 		}
-		return (float64)(nums1[pair+1])
 	}
-	if len1 == 0 && len2 > 0 {
-		pair := len2 / 2
-		if pair*2 == len2 {
-			return (float64)(nums2[pair]+nums2[pair+1]) / 2
-		}
-		return (float64)(nums2[pair+1])
-	}
-
-	l1,l2,r1,r2:=0,0,len(nums1)-1, len(nums2)-1
-
-
+	return float64(m+n) / 2
 }
 
 func Test_l5(t *testing.T) {
