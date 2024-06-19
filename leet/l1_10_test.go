@@ -297,3 +297,13 @@ func isPalindrome(x int) bool {
 	}
 	return true
 }
+
+func Test_l10(t *testing.T) {
+	assert.True(t, isMatch10("aa", "a"))
+	assert.True(t, isMatch10("aa", "a*"))
+	assert.False(t, isMatch10("ab", ".*"))
+}
+
+func isMatch10(s string, p string) bool {
+	return false
+}
