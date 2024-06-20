@@ -2,6 +2,7 @@ package leet
 
 import (
 	"github.com/stretchr/testify/assert"
+	"sort"
 	"testing"
 )
 
@@ -70,6 +71,31 @@ func rotate(matrix [][]int) {
 			matrix[i][j], matrix[j][n-i], matrix[n-i][n-j], matrix[n-j][i] = matrix[n-j][i], matrix[i][j], matrix[j][n-i], matrix[n-i][n-j]
 		}
 	}
+}
+
+func Test_l49(t *testing.T) {
+	groupAnagrams([]string{"eat", "tea", "tan", "ate", "nat", "bat"})
+}
+
+func groupAnagrams(strs []string) [][]string {
+	mp := map[string][]string{}
+	for _, str := range strs {
+		arr := []rune(str)
+		sort.Slice(arr, func(i, j int) bool { return arr[i] < arr[j] })
+		strKey := string(arr)
+
+		if arr, ok := mp[strKey]; !ok {
+			mp[strKey] = []string{str}
+		} else {
+			mp[strKey] = append(arr, str)
+		}
+	}
+
+	ans := [][]string{}
+	for _, arr := range mp {
+		ans = append(ans, arr)
+	}
+	return ans
 }
 
 // x的n次幂
