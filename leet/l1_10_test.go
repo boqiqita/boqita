@@ -299,11 +299,52 @@ func isPalindrome(x int) bool {
 }
 
 func Test_l10(t *testing.T) {
-	assert.True(t, isMatch10("aa", "a"))
+	assert.False(t, isMatch10("aa", "a"))
 	assert.True(t, isMatch10("aa", "a*"))
-	assert.False(t, isMatch10("ab", ".*"))
+	assert.True(t, isMatch10("ab", ".*"))
 }
 
 func isMatch10(s string, p string) bool {
+	return dp10(s, p, len(s), len(p))
+}
+
+func dp10(s, p string, slen, plen int) bool {
+	pSub, c := 0, uint8(0)
+	for i := 0; i < slen; i++ {
+		if pSub >= plen {
+			return false
+		}
+		switch p[pSub] {
+		case '.':
+			c = 0
+			pSub++
+		case '*':
+			if c == 0 {
+				c = p[pSub-1]
+			}
+			if c == '.' || c == s[i] {
+				ns, np := s[i:], p[pSub+1:]
+				if dp10(ns, np, len(ns), len(np)) {
+					return true
+				}
+				break
+			}
+			pSub++
+			if pSub >= plen {
+				return false
+			}
+			fallthrough
+		default:
+			if s[i] != p[pSub] {
+				return false
+			}
+			c = 0
+			pSub++
+		}
+	}
+
+	if pSub >= plen || (pSub+1 == plen && p[pSub] == '*') {
+		return true
+	}
 	return false
 }
