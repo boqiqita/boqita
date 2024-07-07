@@ -1,6 +1,8 @@
 package leet
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/stretchr/testify/assert"
 	"sort"
 	"testing"
@@ -48,6 +50,61 @@ func isMatch44(s string, p string) bool {
 		}
 	}
 	return dp[slen][plen]
+}
+func Test_l45(t *testing.T) {
+	jsonData, _ := json.Marshal(readBinaryWatch(4))
+	fmt.Println(string(jsonData))
+	jsonData, _ = json.Marshal(readBinaryWatch(5))
+	fmt.Println(string(jsonData))
+}
+
+func readBinaryWatch(turnedOn int) []string {
+	hour, minute, ans := map[int][]string{}, map[int][]string{}, []string{}
+	for i := 0; i < 12; i++ {
+		count, temp := 0, i
+		for temp > 0 {
+			if temp&1 == 1 {
+				count++
+			}
+			temp = temp >> 1
+		}
+		arr := hour[count]
+		if arr == nil {
+			arr = []string{}
+		}
+		arr = append(arr, fmt.Sprintf("%d", i))
+		hour[count] = arr
+	}
+
+	for i := 0; i < 60; i++ {
+		count, temp := 0, i
+		for temp > 0 {
+			if temp&1 == 1 {
+				count++
+			}
+			temp = temp >> 1
+		}
+		arr := minute[count]
+		if arr == nil {
+			arr = []string{}
+		}
+		arr = append(arr, fmt.Sprintf("%02d", i))
+		minute[count] = arr
+	}
+
+	for i := 0; i <= turnedOn; i++ {
+		h, ok1 := hour[i]
+		m, ok2 := minute[turnedOn-i]
+		if ok1 && ok2 {
+			for _, v1 := range h {
+				for _, v2 := range m {
+					ans = append(ans, fmt.Sprintf("%s:%s", v1, v2))
+				}
+			}
+		}
+	}
+
+	return ans
 }
 
 func Test_l48(t *testing.T) {
